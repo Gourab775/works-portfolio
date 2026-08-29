@@ -1,0 +1,434 @@
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - heading "Works" [level=1] [ref=e6]
+    - paragraph [ref=e7]: A collection of my best projects
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - button "All" [ref=e15] [cursor=pointer]
+      - button "Landing Pages" [ref=e16] [cursor=pointer]
+      - button "E-Commerce" [ref=e17] [cursor=pointer]
+      - button "Brand" [ref=e18] [cursor=pointer]
+      - button "Web Apps" [ref=e19] [cursor=pointer]
+      - button "Tools" [ref=e20] [cursor=pointer]
+    - paragraph [ref=e22]: Showing 30 projects
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - generic [ref=e25]: Landing Pages
+        - generic [ref=e33]:
+          - heading "Turbo 930 Showcase" [level=3] [ref=e35]
+          - paragraph [ref=e37]: Scroll-driven 3D showcase for Porsche 930 Turbo — WebGL, motion design, editorial storytelling
+          - generic [ref=e38]:
+            - generic [ref=e39]: Three.js
+            - generic [ref=e40]: JavaScript
+            - generic [ref=e41]: CSS
+          - generic [ref=e43]:
+            - link "Live Demo" [ref=e44] [cursor=pointer]:
+              - /url: https://turbo-930-showcase.vercel.app
+            - link "GitHub" [ref=e45] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/turbo-930-showcase
+      - generic [ref=e48]:
+        - generic [ref=e49]: Landing Pages
+        - generic [ref=e57]:
+          - heading "Verdana Oasis" [level=3] [ref=e59]
+          - paragraph [ref=e61]: Immersive WebGL grass experience with procedural blades, wind, and depth-of-field
+          - generic [ref=e62]:
+            - generic [ref=e63]: WebGL
+            - generic [ref=e64]: GLSL
+            - generic [ref=e65]: JavaScript
+          - generic [ref=e67]:
+            - link "Live Demo" [ref=e68] [cursor=pointer]:
+              - /url: https://verdana-oasis.vercel.app
+            - link "GitHub" [ref=e69] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/verdana-oasis
+      - generic [ref=e72]:
+        - generic [ref=e73]: Landing Pages
+        - generic [ref=e81]:
+          - heading "Aethon Helmet" [level=3] [ref=e83]
+          - paragraph [ref=e85]: Interactive 3D helmet configurator with aerospace-grade materials and Three.js
+          - generic [ref=e86]:
+            - generic [ref=e87]: Three.js
+            - generic [ref=e88]: JavaScript
+            - generic [ref=e89]: CSS
+          - generic [ref=e91]:
+            - link "Live Demo" [ref=e92] [cursor=pointer]:
+              - /url: https://aethon-helmet.vercel.app
+            - link "GitHub" [ref=e93] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/aethon-helmet
+      - generic [ref=e96]:
+        - generic [ref=e97]: Landing Pages
+        - generic [ref=e105]:
+          - heading "Aqua Circle 3D" [level=3] [ref=e107]
+          - paragraph [ref=e109]: Circle of Water 3D experience with WebGPU, caustics, and fluid simulation
+          - generic [ref=e110]:
+            - generic [ref=e111]: Three.js
+            - generic [ref=e112]: WebGPU
+            - generic [ref=e113]: Vite
+          - generic [ref=e115]:
+            - link "Live Demo" [ref=e116] [cursor=pointer]:
+              - /url: https://aqua-circle-3d.vercel.app
+            - link "GitHub" [ref=e117] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/aqua-circle-3d
+      - generic [ref=e120]:
+        - generic [ref=e121]: Landing Pages
+        - generic [ref=e129]:
+          - heading "Porsche GT3 Configurator" [level=3] [ref=e131]
+          - paragraph [ref=e133]: Porsche 911 GT3 RS 3D configurator with React Three Fiber and 19MB GLB
+          - generic [ref=e134]:
+            - generic [ref=e135]: React
+            - generic [ref=e136]: R3F
+            - generic [ref=e137]: Drei
+            - generic [ref=e138]: Vite
+          - generic [ref=e140]:
+            - link "Live Demo" [ref=e141] [cursor=pointer]:
+              - /url: https://porsche-gt3.vercel.app
+            - link "GitHub" [ref=e142] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/porsche-gt3
+      - generic [ref=e145]:
+        - generic [ref=e146]: Landing Pages
+        - generic [ref=e154]:
+          - heading "Robot Showcase" [level=3] [ref=e156]
+          - paragraph [ref=e158]: Interactive 3D robot showcase with Spline, Framer Motion, and Next.js
+          - generic [ref=e159]:
+            - generic [ref=e160]: Next.js
+            - generic [ref=e161]: Spline
+            - generic [ref=e162]: Framer
+          - generic [ref=e164]:
+            - link "Live Demo" [ref=e165] [cursor=pointer]:
+              - /url: https://robot-showcase-gourab-neogi.vercel.app
+            - link "GitHub" [ref=e166] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/robot-showcase
+      - generic [ref=e169]:
+        - generic [ref=e170]: Landing Pages
+        - generic [ref=e178]:
+          - heading "Video Expansion" [level=3] [ref=e180]
+          - paragraph [ref=e182]: Scroll-driven media showcase with expandable video and editorial sections
+          - generic [ref=e183]:
+            - generic [ref=e184]: Next.js
+            - generic [ref=e185]: Tailwind
+          - generic [ref=e187]:
+            - link "Live Demo" [ref=e188] [cursor=pointer]:
+              - /url: https://video-expansion.vercel.app
+            - link "GitHub" [ref=e189] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/video-expansion
+      - generic [ref=e192]:
+        - generic [ref=e193]: E-Commerce
+        - generic [ref=e201]:
+          - heading "ToonHub Collection" [level=3] [ref=e203]
+          - paragraph [ref=e205]: 3D figurine showcase with immersive carousel, dynamic theming, and commerce flow
+          - generic [ref=e206]:
+            - generic [ref=e207]: React
+            - generic [ref=e208]: Vite
+            - generic [ref=e209]: Tailwind
+          - generic [ref=e211]:
+            - link "Live Demo" [ref=e212] [cursor=pointer]:
+              - /url: https://toonhub-collection.vercel.app
+            - link "GitHub" [ref=e213] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/toonhub-collection
+      - generic [ref=e216]:
+        - generic [ref=e217]: E-Commerce
+        - generic [ref=e225]:
+          - heading "Amber Skincare" [level=3] [ref=e227]
+          - paragraph [ref=e229]: Premium natural skincare e-commerce — Next.js 16, Tailwind, Shopify integration
+          - generic [ref=e230]:
+            - generic [ref=e231]: Next.js
+            - generic [ref=e232]: Tailwind
+            - generic [ref=e233]: Shopify
+          - generic [ref=e235]:
+            - link "Live Demo" [ref=e236] [cursor=pointer]:
+              - /url: https://amber-skincare.vercel.app
+            - link "GitHub" [ref=e237] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/amber-skincare
+      - generic [ref=e240]:
+        - generic [ref=e241]: E-Commerce
+        - generic [ref=e249]:
+          - heading "Closet Studio" [level=3] [ref=e251]
+          - paragraph [ref=e253]: Fashion e-commerce studio with cart, checkout, and product collections
+          - generic [ref=e254]:
+            - generic [ref=e255]: Next.js
+            - generic [ref=e256]: React
+            - generic [ref=e257]: Tailwind
+          - generic [ref=e259]:
+            - link "Live Demo" [ref=e260] [cursor=pointer]:
+              - /url: https://closet-studio.vercel.app
+            - link "GitHub" [ref=e261] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/closet-studio
+      - generic [ref=e264]:
+        - generic [ref=e265]: E-Commerce
+        - generic [ref=e273]:
+          - heading "FlavorBite Menu" [level=3] [ref=e275]
+          - paragraph [ref=e277]: QR hospitality menu — customer ordering app with Supabase realtime
+          - generic [ref=e278]:
+            - generic [ref=e279]: React
+            - generic [ref=e280]: Vite
+            - generic [ref=e281]: Supabase
+          - generic [ref=e283]:
+            - link "Live Demo" [ref=e284] [cursor=pointer]:
+              - /url: https://flavorbite-menu.vercel.app
+            - link "GitHub" [ref=e285] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/flavorbite-menu
+      - generic [ref=e288]:
+        - generic [ref=e289]: E-Commerce
+        - generic [ref=e297]:
+          - heading "FlavorBite Dashboard" [level=3] [ref=e299]
+          - paragraph [ref=e301]: Operations dashboard for hospitality — orders, analytics, Electron desktop
+          - generic [ref=e302]:
+            - generic [ref=e303]: React
+            - generic [ref=e304]: Electron
+            - generic [ref=e305]: Supabase
+            - generic [ref=e306]: Recharts
+          - generic [ref=e308]:
+            - link "Live Demo" [ref=e309] [cursor=pointer]:
+              - /url: https://flavorbite-dashboard.vercel.app
+            - link "GitHub" [ref=e310] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/flavorbite-dashboard
+      - generic [ref=e313]:
+        - generic [ref=e314]: Brand
+        - generic [ref=e322]:
+          - heading "Finasyt Interactive" [level=3] [ref=e324]
+          - paragraph [ref=e326]: Interactive finance brand site with React, Vite, and Tailwind
+          - generic [ref=e327]:
+            - generic [ref=e328]: React
+            - generic [ref=e329]: Vite
+            - generic [ref=e330]: Tailwind
+          - generic [ref=e332]:
+            - link "Live Demo" [ref=e333] [cursor=pointer]:
+              - /url: https://finasyt-interactive.vercel.app
+            - link "GitHub" [ref=e334] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/finasyt-interactive
+      - generic [ref=e337]:
+        - generic [ref=e338]: Brand
+        - generic [ref=e346]:
+          - heading "Hously Architecture" [level=3] [ref=e348]
+          - paragraph [ref=e350]: Modern architecture brand — Next.js 16, Tailwind v4, shadcn/ui
+          - generic [ref=e351]:
+            - generic [ref=e352]: Next.js
+            - generic [ref=e353]: Tailwind
+            - generic [ref=e354]: shadcn
+          - generic [ref=e356]:
+            - link "Live Demo" [ref=e357] [cursor=pointer]:
+              - /url: https://hously-architecture.vercel.app
+            - link "GitHub" [ref=e358] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/hously-architecture
+      - generic [ref=e361]:
+        - generic [ref=e362]: Brand
+        - generic [ref=e370]:
+          - heading "Agency Website" [level=3] [ref=e372]
+          - paragraph [ref=e374]: Fullstack agency site with Next.js, animations, and editorial sections
+          - generic [ref=e375]:
+            - generic [ref=e376]: Next.js
+            - generic [ref=e377]: Tailwind
+            - generic [ref=e378]: Framer
+          - generic [ref=e380]:
+            - link "Live Demo" [ref=e381] [cursor=pointer]:
+              - /url: https://agency-website-one-teal.vercel.app
+            - link "GitHub" [ref=e382] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/agency-website
+      - generic [ref=e385]:
+        - generic [ref=e386]: Brand
+        - generic [ref=e394]:
+          - heading "Retro Finesyt" [level=3] [ref=e396]
+          - paragraph [ref=e398]: Retro-inspired finance experience with Vite and Tailwind
+          - generic [ref=e399]:
+            - generic [ref=e400]: React
+            - generic [ref=e401]: Vite
+            - generic [ref=e402]: Tailwind
+          - generic [ref=e404]:
+            - link "Live Demo" [ref=e405] [cursor=pointer]:
+              - /url: https://retro-finesyt.vercel.app
+            - link "GitHub" [ref=e406] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/retro-finesyt
+      - generic [ref=e409]:
+        - generic [ref=e410]: Brand
+        - generic [ref=e418]:
+          - heading "Revolvyn Platform" [level=3] [ref=e420]
+          - paragraph [ref=e422]: Next-gen digital marketing showcase with WebGPU and editorial design
+          - generic [ref=e423]:
+            - generic [ref=e424]: WebGPU
+            - generic [ref=e425]: Three.js
+            - generic [ref=e426]: JavaScript
+          - generic [ref=e428]:
+            - link "Live Demo" [ref=e429] [cursor=pointer]:
+              - /url: https://revolvyn-platform.vercel.app
+            - link "GitHub" [ref=e430] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/revolvyn-platform
+      - generic [ref=e433]:
+        - generic [ref=e434]: Web Apps
+        - generic [ref=e442]:
+          - heading "After-Sales Workspace" [level=3] [ref=e444]
+          - paragraph [ref=e446]: Support workspace for order lookup, refunds, and knowledge routing
+          - generic [ref=e447]:
+            - generic [ref=e448]: Next.js
+            - generic [ref=e449]: TypeScript
+            - generic [ref=e450]: Tailwind
+          - generic [ref=e452]:
+            - link "Live Demo" [ref=e453] [cursor=pointer]:
+              - /url: https://after-sales-workspace.vercel.app
+            - link "GitHub" [ref=e454] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/after-sales-workspace
+      - generic [ref=e457]:
+        - generic [ref=e458]: Web Apps
+        - generic [ref=e466]:
+          - heading "Chat Workspace" [level=3] [ref=e468]
+          - paragraph [ref=e470]: Embeddable chat workspace with zero-config page context and API integration
+          - generic [ref=e471]:
+            - generic [ref=e472]: Next.js
+            - generic [ref=e473]: TypeScript
+            - generic [ref=e474]: Tailwind
+          - generic [ref=e476]:
+            - link "Live Demo" [ref=e477] [cursor=pointer]:
+              - /url: https://chat-workspace.vercel.app
+            - link "GitHub" [ref=e478] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/chat-workspace
+      - generic [ref=e481]:
+        - generic [ref=e482]: Web Apps
+        - generic [ref=e490]:
+          - heading "Inbox Workspace" [level=3] [ref=e492]
+          - paragraph [ref=e494]: Email automation workspace with triage, prioritization, and draft assistance
+          - generic [ref=e495]:
+            - generic [ref=e496]: Vite
+            - generic [ref=e497]: React
+            - generic [ref=e498]: Supabase
+          - generic [ref=e500]:
+            - link "Live Demo" [ref=e501] [cursor=pointer]:
+              - /url: https://inbox-workspace.vercel.app
+            - link "GitHub" [ref=e502] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/inbox-workspace
+      - generic [ref=e505]:
+        - generic [ref=e506]: Web Apps
+        - generic [ref=e514]:
+          - heading "Fitness Platform" [level=3] [ref=e516]
+          - paragraph [ref=e518]: Fitness app with programs, workouts, and progress tracking
+          - generic [ref=e519]:
+            - generic [ref=e520]: Next.js
+            - generic [ref=e521]: Tailwind
+          - generic [ref=e523]:
+            - link "Live Demo" [ref=e524] [cursor=pointer]:
+              - /url: https://fitness-platform-gourab-neogi.vercel.app
+            - link "GitHub" [ref=e525] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/fitness-platform
+      - generic [ref=e528]:
+        - generic [ref=e529]: Web Apps
+        - generic [ref=e537]:
+          - heading "Horizon Platform" [level=3] [ref=e539]
+          - paragraph [ref=e541]: SaaS platform with Next.js and modern UI
+          - generic [ref=e542]:
+            - generic [ref=e543]: Next.js
+            - generic [ref=e544]: Tailwind
+          - generic [ref=e546]:
+            - link "Live Demo" [ref=e547] [cursor=pointer]:
+              - /url: https://horizon-platform.vercel.app
+            - link "GitHub" [ref=e548] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/horizon-platform
+      - generic [ref=e551]:
+        - generic [ref=e552]: Web Apps
+        - generic [ref=e560]:
+          - heading "Quiz Workspace" [level=3] [ref=e562]
+          - paragraph [ref=e564]: Interactive quiz workspace for learning and assessment with Vite
+          - generic [ref=e565]:
+            - generic [ref=e566]: Vite
+            - generic [ref=e567]: React
+            - generic [ref=e568]: TypeScript
+          - generic [ref=e570]:
+            - link "Live Demo" [ref=e571] [cursor=pointer]:
+              - /url: https://quiz-workspace.vercel.app
+            - link "GitHub" [ref=e572] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/quiz-workspace
+      - generic [ref=e575]:
+        - generic [ref=e576]: Tools
+        - generic [ref=e584]:
+          - heading "Content Workspace" [level=3] [ref=e586]
+          - paragraph [ref=e588]: Content creation workspace with research, outline, and SEO analysis
+          - generic [ref=e589]:
+            - generic [ref=e590]: Next.js
+            - generic [ref=e591]: TypeScript
+            - generic [ref=e592]: Tailwind
+          - generic [ref=e594]:
+            - link "Live Demo" [ref=e595] [cursor=pointer]:
+              - /url: https://content-workspace.vercel.app
+            - link "GitHub" [ref=e596] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/content-workspace
+      - generic [ref=e599]:
+        - generic [ref=e600]: Tools
+        - generic [ref=e608]:
+          - heading "CSV Workspace" [level=3] [ref=e610]
+          - paragraph [ref=e612]: CSV analysis workspace with data profiling, Vega-Lite charts, and insights
+          - generic [ref=e613]:
+            - generic [ref=e614]: Vite
+            - generic [ref=e615]: React
+            - generic [ref=e616]: Supabase
+          - generic [ref=e618]:
+            - link "Live Demo" [ref=e619] [cursor=pointer]:
+              - /url: https://csv-workspace.vercel.app
+            - link "GitHub" [ref=e620] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/csv-workspace
+      - generic [ref=e623]:
+        - generic [ref=e624]: Tools
+        - generic [ref=e632]:
+          - heading "File Workspace" [level=3] [ref=e634]
+          - paragraph [ref=e636]: Multimodal file workspace for PDF, Word, Excel, and image processing
+          - generic [ref=e637]:
+            - generic [ref=e638]: Next.js
+            - generic [ref=e639]: TypeScript
+            - generic [ref=e640]: Tailwind
+          - generic [ref=e642]:
+            - link "Live Demo" [ref=e643] [cursor=pointer]:
+              - /url: https://file-workspace.vercel.app
+            - link "GitHub" [ref=e644] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/file-workspace
+      - generic [ref=e647]:
+        - generic [ref=e648]: Tools
+        - generic [ref=e656]:
+          - heading "Content Quality Workspace" [level=3] [ref=e658]
+          - paragraph [ref=e660]: Premium content platform with dark theme and smooth animations
+          - generic [ref=e661]:
+            - generic [ref=e662]: Next.js
+            - generic [ref=e663]: Tailwind
+          - generic [ref=e665]:
+            - link "Live Demo" [ref=e666] [cursor=pointer]:
+              - /url: https://content-quality-workspace.vercel.app
+            - link "GitHub" [ref=e667] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/content-quality-workspace
+      - generic [ref=e670]:
+        - generic [ref=e671]: Tools
+        - generic [ref=e679]:
+          - heading "Trends Workspace" [level=3] [ref=e681]
+          - paragraph [ref=e683]: Scheduled trend analysis with Hacker News, Dev.to, and web sources
+          - generic [ref=e684]:
+            - generic [ref=e685]: Vite
+            - generic [ref=e686]: React
+            - generic [ref=e687]: Node
+          - generic [ref=e689]:
+            - link "Live Demo" [ref=e690] [cursor=pointer]:
+              - /url: https://trends-workspace.vercel.app
+            - link "GitHub" [ref=e691] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/trends-workspace
+      - generic [ref=e694]:
+        - generic [ref=e695]: Tools
+        - generic [ref=e703]:
+          - heading "Campaign Workspace" [level=3] [ref=e705]
+          - paragraph [ref=e707]: Marketing campaign planner with strategist, analyst, and channel workflows
+          - generic [ref=e708]:
+            - generic [ref=e709]: Vite
+            - generic [ref=e710]: React
+            - generic [ref=e711]: Tailwind
+          - generic [ref=e713]:
+            - link "Live Demo" [ref=e714] [cursor=pointer]:
+              - /url: https://campaign-workspace-gourab-neogi.vercel.app
+            - link "GitHub" [ref=e715] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/campaign-workspace
+      - generic [ref=e718]:
+        - generic [ref=e719]: Tools
+        - generic [ref=e727]:
+          - heading "Product Workspace" [level=3] [ref=e729]
+          - paragraph [ref=e731]: Product planning workspace that turns ideas into strategic roadmaps
+          - generic [ref=e732]:
+            - generic [ref=e733]: Vite
+            - generic [ref=e734]: React
+            - generic [ref=e735]: Tailwind
+          - generic [ref=e737]:
+            - link "Live Demo" [ref=e738] [cursor=pointer]:
+              - /url: https://product-workspace-gourab-neogi.vercel.app
+            - link "GitHub" [ref=e739] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/product-workspace
+    - status [ref=e742]
+  - button "Edit Mode" [ref=e743] [cursor=pointer]

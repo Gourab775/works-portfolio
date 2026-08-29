@@ -1,0 +1,87 @@
+- generic [ref=e3]:
+  - generic [ref=e5]:
+    - heading "Works" [level=1] [ref=e6]
+    - paragraph [ref=e7]: A collection of my best projects
+  - generic [ref=e13]:
+    - generic [ref=e14]:
+      - button "All" [ref=e15] [cursor=pointer]
+      - button "Landing Pages" [ref=e16] [cursor=pointer]
+      - button "E-Commerce" [active] [ref=e17] [cursor=pointer]
+      - button "Brand" [ref=e18] [cursor=pointer]
+      - button "Web Apps" [ref=e19] [cursor=pointer]
+      - button "Tools" [ref=e20] [cursor=pointer]
+    - paragraph [ref=e22]: Showing 5 projects
+    - generic [ref=e23]:
+      - generic [ref=e913]:
+        - generic [ref=e914]: E-Commerce
+        - generic [ref=e922]:
+          - heading "ToonHub Collection" [level=3] [ref=e924]
+          - paragraph [ref=e926]: 3D figurine showcase with immersive carousel, dynamic theming, and commerce flow
+          - generic [ref=e927]:
+            - generic [ref=e928]: React
+            - generic [ref=e929]: Vite
+            - generic [ref=e930]: Tailwind
+          - generic [ref=e932]:
+            - link "Live Demo" [ref=e933] [cursor=pointer]:
+              - /url: https://toonhub-collection.vercel.app
+            - link "GitHub" [ref=e934] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/toonhub-collection
+      - generic [ref=e937]:
+        - generic [ref=e938]: E-Commerce
+        - generic [ref=e946]:
+          - heading "Amber Skincare" [level=3] [ref=e948]
+          - paragraph [ref=e950]: Premium natural skincare e-commerce — Next.js 16, Tailwind, Shopify integration
+          - generic [ref=e951]:
+            - generic [ref=e952]: Next.js
+            - generic [ref=e953]: Tailwind
+            - generic [ref=e954]: Shopify
+          - generic [ref=e956]:
+            - link "Live Demo" [ref=e957] [cursor=pointer]:
+              - /url: https://amber-skincare.vercel.app
+            - link "GitHub" [ref=e958] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/amber-skincare
+      - generic [ref=e961]:
+        - generic [ref=e962]: E-Commerce
+        - generic [ref=e970]:
+          - heading "Closet Studio" [level=3] [ref=e972]
+          - paragraph [ref=e974]: Fashion e-commerce studio with cart, checkout, and product collections
+          - generic [ref=e975]:
+            - generic [ref=e976]: Next.js
+            - generic [ref=e977]: React
+            - generic [ref=e978]: Tailwind
+          - generic [ref=e980]:
+            - link "Live Demo" [ref=e981] [cursor=pointer]:
+              - /url: https://closet-studio.vercel.app
+            - link "GitHub" [ref=e982] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/closet-studio
+      - generic [ref=e985]:
+        - generic [ref=e986]: E-Commerce
+        - generic [ref=e994]:
+          - heading "FlavorBite Menu" [level=3] [ref=e996]
+          - paragraph [ref=e998]: QR hospitality menu — customer ordering app with Supabase realtime
+          - generic [ref=e999]:
+            - generic [ref=e1000]: React
+            - generic [ref=e1001]: Vite
+            - generic [ref=e1002]: Supabase
+          - generic [ref=e1004]:
+            - link "Live Demo" [ref=e1005] [cursor=pointer]:
+              - /url: https://flavorbite-menu.vercel.app
+            - link "GitHub" [ref=e1006] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/flavorbite-menu
+      - generic [ref=e1009]:
+        - generic [ref=e1010]: E-Commerce
+        - generic [ref=e1018]:
+          - heading "FlavorBite Dashboard" [level=3] [ref=e1020]
+          - paragraph [ref=e1022]: Operations dashboard for hospitality — orders, analytics, Electron desktop
+          - generic [ref=e1023]:
+            - generic [ref=e1024]: React
+            - generic [ref=e1025]: Electron
+            - generic [ref=e1026]: Supabase
+            - generic [ref=e1027]: Recharts
+          - generic [ref=e1029]:
+            - link "Live Demo" [ref=e1030] [cursor=pointer]:
+              - /url: https://flavorbite-dashboard.vercel.app
+            - link "GitHub" [ref=e1031] [cursor=pointer]:
+              - /url: https://github.com/Gourab775/flavorbite-dashboard
+    - status [ref=e742]
+  - button "Edit Mode" [ref=e743] [cursor=pointer]
