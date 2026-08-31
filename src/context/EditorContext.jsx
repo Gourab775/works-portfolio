@@ -3,19 +3,27 @@ import { defaultProjects, defaultTheme } from '../data/projects'
 
 const EditorContext = createContext(null)
 
-const STORAGE_KEY = 'works-portfolio-data-v2'
+const STORAGE_KEY = 'works-by-gourab-data-v2'
 
 function loadFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const data = JSON.parse(raw)
+      // Migration: if stored data is old (6 projects) or categories mismatch, use defaults
+      const expectedCats = ['All', ...new Set(defaultProjects.map(p => p.category))]
+      const isOld = !data.projects || data.projects.length !== defaultProjects.length || !data.categories || data.categories.length !== expectedCats.length || !expectedCats.every(c => data.categories.includes(c))
+      if (isOld) {
+        console.log('Migrating storage: old data detected, using defaultProjects (30)')
+        localStorage.removeItem(STORAGE_KEY)
+        return null
+      }
       return {
         projects: data.projects || defaultProjects,
         theme: { ...defaultTheme, ...(data.theme || {}) },
         heroText: data.heroText || 'Works',
         heroSubtitle: data.heroSubtitle || 'A collection of my best projects',
-        categories: data.categories || ['All', ...new Set(defaultProjects.map(p => p.category))],
+        categories: data.categories || expectedCats,
       }
     }
   } catch (e) {
