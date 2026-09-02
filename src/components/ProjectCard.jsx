@@ -110,6 +110,14 @@ export default function ProjectCard({ project }) {
   }
 
   const isVideo = project.thumbnailType === 'video' && project.thumbnail
+  const hasCustomThumb = !!project.thumbnail
+  // Screenshot fallback — website first look (SS type) via WordPress mshots + thum.io fallback
+  const screenshotUrl = project.liveUrl && project.liveUrl.startsWith('http')
+    ? `https://s.wordpress.com/mshots/v1/${encodeURIComponent(project.liveUrl)}?w=600&h=400`
+    : null
+  const fallbackThumb = project.liveUrl && project.liveUrl.startsWith('http')
+    ? `https://image.thum.io/get/width/600/crop/800/${project.liveUrl}`
+    : null
 
   return (
     <div
@@ -167,12 +175,12 @@ export default function ProjectCard({ project }) {
         </div>
       )}
 
-      {/* Thumbnail */}
+      {/* Thumbnail — with auto screenshot (website first look) */}
       <div
         className="relative aspect-[16/10] overflow-hidden shrink-0"
         style={{ backgroundColor: theme.tagBg }}
       >
-        {project.thumbnail ? (
+        {hasCustomThumb ? (
           isVideo ? (
             <video
               src={project.thumbnail}
@@ -189,6 +197,16 @@ export default function ProjectCard({ project }) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           )
+        ) : screenshotUrl ? (
+          <img
+            src={screenshotUrl}
+            alt={`${project.title} preview`}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            onError={(e) => {
+              if (fallbackThumb && e.target.src !== fallbackThumb) e.target.src = fallbackThumb
+            }}
+          />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <svg className="w-12 h-12 opacity-20" style={{ color: theme.cardDesc }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
@@ -199,11 +217,19 @@ export default function ProjectCard({ project }) {
           </div>
         )}
 
-        {isVideo && (
+        {/* Badges */}
+        {isVideo && hasCustomThumb && (
           <div className="absolute top-3 right-3">
             <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm flex items-center gap-1">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
               Video
+            </span>
+          </div>
+        )}
+        {!hasCustomThumb && screenshotUrl && (
+          <div className="absolute top-3 right-3">
+            <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-white/90 text-zinc-700 backdrop-blur-sm border border-zinc-200">
+              Live SS
             </span>
           </div>
         )}
