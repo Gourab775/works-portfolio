@@ -30,13 +30,40 @@ function loadFromStorage() {
         localStorage.removeItem(STORAGE_KEY)
         return null
       }
-      // Keep user data as-is — any length (add/delete projects/categories) is preserved
+      // Merge new default projects/categories that are missing in stored data (e.g. new Laocoon)
+      let mergedProjects = data.projects
+      const storedIds = new Set(data.projects.map(p => String(p.id)))
+      const missing = defaultProjects.filter(p => !storedIds.has(String(p.id)))
+      if (missing.length > 0) {
+        console.log(`Merging ${missing.length} new default project(s) into stored data`)
+        mergedProjects = [...data.projects, ...missing]
+      }
+      // Merge categories: add any default category not in stored (keep user custom)
+      const expectedCats = ['All', ...new Set(defaultProjects.map(p => p.category))]
+      let mergedCats = data.categories
+      const missingCats = expectedCats.filter(c => !data.categories.includes(c))
+      if (missingCats.length > 0) {
+        mergedCats = [...data.categories, ...missingCats]
+      }
+      // Persist merged if changed
+      if (missing.length > 0 || missingCats.length > 0) {
+        try {
+          const toSave = {
+            projects: mergedProjects,
+            theme: { ...defaultTheme, ...(data.theme || {}) },
+            heroText: typeof data.heroText === 'string' ? data.heroText : 'Works',
+            heroSubtitle: typeof data.heroSubtitle === 'string' ? data.heroSubtitle : 'A collection of my best projects',
+            categories: mergedCats,
+          }
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave))
+        } catch {}
+      }
       return {
-        projects: data.projects,
+        projects: mergedProjects,
         theme: { ...defaultTheme, ...(data.theme || {}) },
         heroText: typeof data.heroText === 'string' ? data.heroText : 'Works',
         heroSubtitle: typeof data.heroSubtitle === 'string' ? data.heroSubtitle : 'A collection of my best projects',
-        categories: data.categories,
+        categories: mergedCats,
       }
     }
   } catch (e) {
