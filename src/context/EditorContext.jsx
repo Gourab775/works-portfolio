@@ -108,7 +108,12 @@ export function EditorProvider({ children }) {
   const [heroSubtitle, setHeroSubtitle] = useState(stored?.heroSubtitle || 'A collection of my best projects')
   const [categories, setCategories] = useState(stored?.categories || ['All', ...new Set(defaultProjects.map(p => p.category))])
   const [saveStatus, setSaveStatus] = useState('saved')
+  const [pushStatus, setPushStatus] = useState('idle') // idle | pushing | pushed | error
+  const [autoPush, setAutoPush] = useState(() => {
+    try { return localStorage.getItem('works-by-gourab-auto-push') === 'true' } catch { return false }
+  })
   const saveTimerRef = useRef(null)
+  const pushTimerRef = useRef(null)
 
   // Auto-save with debounce
   useEffect(() => {
@@ -120,6 +125,43 @@ export function EditorProvider({ children }) {
     }, 300)
     return () => { if (saveTimerRef.current) clearTimeout(saveTimerRef.current) }
   }, [projects, theme, heroText, heroSubtitle, categories])
+
+  // Persist autoPush toggle
+  useEffect(() => {
+    try { localStorage.setItem('works-by-gourab-auto-push', String(autoPush)) } catch {}
+  }, [autoPush])
+
+  // Auto GitHub push after every change (when enabled) — debounced 2s
+  const pushToGitHub = useCallback(async (payload) => {
+    const data = payload || { projects, theme, heroText, heroSubtitle, categories }
+    setPushStatus('pushing')
+    try {
+      const res = await fetch('/api/push', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      setPushStatus('pushed')
+      setTimeout(() => setPushStatus('idle'), 2000)
+      return true
+    } catch (e) {
+      console.error('Auto push failed, falling back to local save only', e)
+      // still mark as pushed locally (since local save succeeded), but show error for GitHub
+      setPushStatus('error')
+      setTimeout(() => setPushStatus('idle'), 2500)
+      return false
+    }
+  }, [projects, theme, heroText, heroSubtitle, categories])
+
+  useEffect(() => {
+    if (!autoPush) return
+    if (pushTimerRef.current) clearTimeout(pushTimerRef.current)
+    pushTimerRef.current = setTimeout(() => {
+      pushToGitHub()
+    }, 2000)
+    return () => { if (pushTimerRef.current) clearTimeout(pushTimerRef.current) }
+  }, [projects, theme, heroText, heroSubtitle, categories, autoPush, pushToGitHub])
 
   const updateProject = useCallback((id, updates) => {
     setProjects(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p))
@@ -155,6 +197,33 @@ export function EditorProvider({ children }) {
       const [moved] = arr.splice(oldIndex, 1)
       arr.splice(newIndex, 0, moved)
       return arr
+    })
+  }, [])
+
+  const moveProject = useCallback((id, direction) => {
+    setProjects(prev => {
+      const idx = prev.findIndex(p => p.id === id)
+      if (idx === -1) return prev
+      const newIdx = direction === 'up' ? idx - 1 : idx + 1
+      if (newIdx < 0 || newIdx >= prev.length) return prev
+      const arr = [...prev]
+      const [moved] = arr.splice(idx, 1)
+      arr.splice(newIdx, 0, moved)
+      return arr
+    })
+  }, [])
+
+  const reorderCategories = useCallback((oldIndex, newIndex) => {
+    setCategories(prev => {
+      // Keep 'All' always at 0
+      const all = prev[0] === 'All' ? ['All'] : []
+      const rest = prev[0] === 'All' ? prev.slice(1) : [...prev]
+      const adjOld = prev[0] === 'All' ? oldIndex - 1 : oldIndex
+      const adjNew = prev[0] === 'All' ? newIndex - 1 : newIndex
+      if (adjOld < 0 || adjNew < 0 || adjOld >= rest.length || adjNew >= rest.length) return prev
+      const [moved] = rest.splice(adjOld, 1)
+      rest.splice(adjNew, 0, moved)
+      return [...all, ...rest]
     })
   }, [])
 
@@ -210,13 +279,13 @@ export function EditorProvider({ children }) {
     <EditorContext.Provider value={{
       projects, theme, guiMode, selectedElement,
       heroText, heroSubtitle,
-      categories, saveStatus,
+      categories, saveStatus, pushStatus, autoPush,
       setHeroText, setHeroSubtitle,
       updateProject, addProject, removeProject,
-      toggleProjectVisibility, reorderProjects,
+      toggleProjectVisibility, reorderProjects, moveProject, reorderCategories,
       updateTheme, toggleGuiMode, setSelectedElement,
       addCategory, removeCategory, renameCategory,
-      resetAll, forceSave,
+      resetAll, forceSave, pushToGitHub, setAutoPush,
     }}>
       {children}
     </EditorContext.Provider>
