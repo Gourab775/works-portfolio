@@ -84,6 +84,18 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/video-expansion',
     visible: true,
   },
+  {
+    id: '31',
+    title: 'Laocoon — Bronze and Time',
+    description: 'Cinematic scroll-driven WebGL landing page — liquid bronze shader, forge sparks, GLTF statue, 360° camera orbit',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Landing Pages',
+    tech: ['Three.js', 'GLSL', 'WebGL'],
+    liveUrl: 'https://laocoon-seven.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/Laocoon',
+    visible: true,
+  },
   // E-Commerce (5)
   {
     id: '8',

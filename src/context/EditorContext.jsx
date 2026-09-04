@@ -5,25 +5,38 @@ const EditorContext = createContext(null)
 
 const STORAGE_KEY = 'works-by-gourab-data-v2'
 
+const LEGACY_KEY = 'works-portfolio-data-v2'
+
 function loadFromStorage() {
   try {
+    // Migrate legacy key if new key empty but old exists
+    const legacyRaw = localStorage.getItem(LEGACY_KEY)
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) {
-      const data = JSON.parse(raw)
-      // Migration: if stored data is old (6 projects) or categories mismatch, use defaults
-      const expectedCats = ['All', ...new Set(defaultProjects.map(p => p.category))]
-      const isOld = !data.projects || data.projects.length !== defaultProjects.length || !data.categories || data.categories.length !== expectedCats.length || !expectedCats.every(c => data.categories.includes(c))
-      if (isOld) {
-        console.log('Migrating storage: old data detected, using defaultProjects (30)')
+    if (!raw && legacyRaw) {
+      try {
+        localStorage.setItem(STORAGE_KEY, legacyRaw)
+        console.log('Migrated legacy storage to new key')
+      } catch {}
+    }
+    const effectiveRaw = localStorage.getItem(STORAGE_KEY)
+    if (effectiveRaw) {
+      const data = JSON.parse(effectiveRaw)
+      const hasProjects = Array.isArray(data.projects) && data.projects.length > 0
+      const hasCategories = Array.isArray(data.categories) && data.categories.length > 0 && data.categories.includes('All')
+      // Only reset if corrupted or very old (less than 6 projects = original old portfolio)
+      const isCorrupted = !hasProjects || !hasCategories || data.projects.length < 6
+      if (isCorrupted) {
+        console.log('Corrupted/very old data, resetting to defaults')
         localStorage.removeItem(STORAGE_KEY)
         return null
       }
+      // Keep user data as-is — any length (add/delete projects/categories) is preserved
       return {
-        projects: data.projects || defaultProjects,
+        projects: data.projects,
         theme: { ...defaultTheme, ...(data.theme || {}) },
-        heroText: data.heroText || 'Works',
-        heroSubtitle: data.heroSubtitle || 'A collection of my best projects',
-        categories: data.categories || expectedCats,
+        heroText: typeof data.heroText === 'string' ? data.heroText : 'Works',
+        heroSubtitle: typeof data.heroSubtitle === 'string' ? data.heroSubtitle : 'A collection of my best projects',
+        categories: data.categories,
       }
     }
   } catch (e) {
@@ -39,6 +52,20 @@ function saveToStorage(data) {
     return true
   } catch (e) {
     console.error('Failed to save to storage:', e)
+    // Quota exceeded — try without thumbnails (biggest payload)
+    if (e.name === 'QuotaExceededError' || e.code === 22 || String(e).includes('quota')) {
+      try {
+        const slim = {
+          ...data,
+          projects: data.projects.map(p => ({ ...p, thumbnail: p.thumbnail && p.thumbnail.startsWith('data:') && p.thumbnail.length > 50000 ? '' : p.thumbnail }))
+        }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(slim))
+        console.warn('Saved slim version without large thumbnails due to quota')
+        return true
+      } catch (e2) {
+        console.error('Slim save also failed:', e2)
+      }
+    }
     return false
   }
 }
@@ -133,16 +160,23 @@ export function EditorProvider({ children }) {
 
   const resetAll = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(LEGACY_KEY)
     setProjects(defaultProjects)
     setTheme(defaultTheme)
     setHeroText('Works')
     setHeroSubtitle('A collection of my best projects')
     setCategories(['All', ...new Set(defaultProjects.map(p => p.category))])
+    setSaveStatus('saved')
   }, [])
 
   const forceSave = useCallback(() => {
+    if (saveTimerRef.current) {
+      clearTimeout(saveTimerRef.current)
+      saveTimerRef.current = null
+    }
     const ok = saveToStorage({ projects, theme, heroText, heroSubtitle, categories })
     setSaveStatus(ok ? 'saved' : 'error')
+    return ok
   }, [projects, theme, heroText, heroSubtitle, categories])
 
   return (

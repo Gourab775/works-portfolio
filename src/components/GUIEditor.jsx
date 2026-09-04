@@ -38,8 +38,12 @@ export default function GUIEditor() {
   ]
 
   const handleSaveAndRefresh = () => {
-    forceSave()
-    setTimeout(() => window.location.reload(), 400)
+    const ok = forceSave()
+    if (ok) {
+      setTimeout(() => window.location.reload(), 300)
+    } else {
+      alert('Save failed — storage full. Try removing large thumbnails (Auto SS) or deleting some projects.')
+    }
   }
 
   const handleAddCategory = () => {
