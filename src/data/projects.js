@@ -376,6 +376,19 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/product-workspace',
     visible: true,
   },
+  // Hero Section (1)
+  {
+    id: '32',
+    title: 'Diet Soda Hero',
+    description: 'Premium 3D hero section with interactive soda can, parallax berries/leaves, and flavor switch — GSAP + model-viewer + Vite',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Hero Section',
+    tech: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'model-viewer', 'Vite'],
+    liveUrl: 'https://diet-soda-hero.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/diet-soda-hero',
+    visible: true,
+  },
 ]
 
 export const defaultTheme = {
