@@ -32,7 +32,7 @@ export default function GUIEditor() {
   const {
     guiMode, toggleGuiMode, theme, updateTheme,
     heroText, heroSubtitle, setHeroText, setHeroSubtitle,
-    projects, categories, addCategory, removeCategory, renameCategory, reorderCategories,
+    projects, categories, sectionOrder, addCategory, removeCategory, renameCategory, reorderCategories, reorderSections, moveSection,
     addProject, updateProject, removeProject, toggleProjectVisibility, reorderProjects, moveProject,
     saveStatus, pushStatus, autoPush, setAutoPush, forceSave, pushToGitHub, resetAll
   } = useEditor()
@@ -119,6 +119,19 @@ export default function GUIEditor() {
     if (oldIndex !== -1 && newIndex !== -1) reorderProjects(oldIndex, newIndex)
   }
 
+  const handleSectionDragEnd = (event) => {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
+    const oldIndex = sectionOrder.findIndex(s => s === active.id)
+    const newIndex = sectionOrder.findIndex(s => s === over.id)
+    if (oldIndex !== -1 && newIndex !== -1) reorderSections(oldIndex, newIndex)
+  }
+
+  const sectionMeta = {
+    hero: { label: 'Hero', desc: 'Top big title + subtitle', icon: 'H' },
+    works: { label: 'Works', desc: 'Filter + 31 project cards', icon: '≡' },
+  }
+
   const filteredProjects = projectSearch
     ? projects.filter(p => p.title.toLowerCase().includes(projectSearch.toLowerCase()) || p.category.toLowerCase().includes(projectSearch.toLowerCase()))
     : projects
@@ -195,6 +208,48 @@ export default function GUIEditor() {
                 <span className="text-xs font-semibold text-zinc-800 block mb-1.5">Subtitle</span>
                 <input value={heroSubtitle} onChange={(e) => setHeroSubtitle(e.target.value)} className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-300 text-sm font-medium text-zinc-900 placeholder-zinc-400 outline-none focus:border-zinc-900 focus:ring-2 focus:ring-zinc-900/10 bg-white" placeholder="A collection..." />
               </label>
+            </div>
+          </section>
+
+          {/* SECTIONS — position change for har ek section */}
+          <section className="bg-white rounded-2xl border border-zinc-300 shadow-sm p-4">
+            <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2 mb-3">
+              <span className="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center text-xs">↕</span>
+              Sections — drag ⋮⋮ or ▲▼ to move
+            </h3>
+            <p className="text-[11px] font-medium text-zinc-500 mb-3 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">Har section ki position yahi se badlo — Hero / Works. Website pe bhi ⋮⋮ Move se drag karo.</p>
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleSectionDragEnd}>
+              <SortableContext items={sectionOrder} strategy={verticalListSortingStrategy}>
+                <div className="space-y-2">
+                  {sectionOrder.map((sid, idx) => {
+                    const meta = sectionMeta[sid] || { label: sid, desc: '', icon: '•' }
+                    return (
+                      <SortableCategory key={sid} id={sid}>
+                        <div className="flex items-center justify-between px-3.5 py-3 rounded-xl bg-white border-2 border-zinc-300 shadow-sm hover:border-zinc-900 transition">
+                          <div className="flex items-center gap-3 min-w-0">
+                            <span className="w-8 h-8 rounded-lg bg-zinc-900 text-white flex items-center justify-center text-xs font-bold shrink-0">{meta.icon}</span>
+                            <div className="min-w-0">
+                              <div className="text-sm font-bold text-zinc-900">{meta.label}</div>
+                              <div className="text-xs font-medium text-zinc-500 truncate">{meta.desc} • #{idx + 1}</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0">
+                            <div className="hidden sm:flex flex-col gap-1 mr-1">
+                              <button onClick={() => moveSection(sid, 'up')} disabled={idx === 0} className="w-6 h-6 rounded bg-white border border-zinc-300 flex items-center justify-center hover:border-zinc-900 disabled:opacity-30 text-xs">▲</button>
+                              <button onClick={() => moveSection(sid, 'down')} disabled={idx === sectionOrder.length - 1} className="w-6 h-6 rounded bg-white border border-zinc-300 flex items-center justify-center hover:border-zinc-900 disabled:opacity-30 text-xs">▼</button>
+                            </div>
+                            <span className="text-xs font-bold px-2 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700">#{idx + 1}</span>
+                          </div>
+                        </div>
+                      </SortableCategory>
+                    )
+                  })}
+                </div>
+              </SortableContext>
+            </DndContext>
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button onClick={() => { const cur = [...sectionOrder]; if (cur[0] !== 'hero') { const i = cur.indexOf('hero'); if (i > 0) reorderSections(i, 0) } }} className="py-2 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-bold hover:border-zinc-900">Hero on top</button>
+              <button onClick={() => { const cur = [...sectionOrder]; if (cur[0] !== 'works') { const i = cur.indexOf('works'); if (i > 0) reorderSections(i, 0) } }} className="py-2 rounded-xl bg-zinc-50 border border-zinc-300 text-xs font-bold hover:border-zinc-900">Works on top</button>
             </div>
           </section>
 

@@ -46,7 +46,17 @@ function loadFromStorage() {
         mergedCats = [...data.categories, ...missingCats]
       }
       // Persist merged if changed
-      if (missing.length > 0 || missingCats.length > 0) {
+      const storedSectionOrder = Array.isArray(data.sectionOrder) && data.sectionOrder.length > 0 ? data.sectionOrder : null
+      const expectedSections = ['hero', 'works']
+      let mergedSections = storedSectionOrder || expectedSections
+      // if stored missing any expected, add
+      const missingSections = expectedSections.filter(s => !mergedSections.includes(s))
+      if (missingSections.length > 0) mergedSections = [...mergedSections, ...missingSections]
+      // filter out unknown
+      mergedSections = mergedSections.filter(s => expectedSections.includes(s))
+      if (mergedSections.length === 0) mergedSections = expectedSections
+
+      if (missing.length > 0 || missingCats.length > 0 || !storedSectionOrder) {
         try {
           const toSave = {
             projects: mergedProjects,
@@ -54,6 +64,7 @@ function loadFromStorage() {
             heroText: typeof data.heroText === 'string' ? data.heroText : 'Works',
             heroSubtitle: typeof data.heroSubtitle === 'string' ? data.heroSubtitle : 'A collection of my best projects',
             categories: mergedCats,
+            sectionOrder: mergedSections,
           }
           localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave))
         } catch {}
@@ -64,6 +75,7 @@ function loadFromStorage() {
         heroText: typeof data.heroText === 'string' ? data.heroText : 'Works',
         heroSubtitle: typeof data.heroSubtitle === 'string' ? data.heroSubtitle : 'A collection of my best projects',
         categories: mergedCats,
+        sectionOrder: mergedSections,
       }
     }
   } catch (e) {
@@ -107,6 +119,8 @@ export function EditorProvider({ children }) {
   const [heroText, setHeroText] = useState(stored?.heroText || 'Works')
   const [heroSubtitle, setHeroSubtitle] = useState(stored?.heroSubtitle || 'A collection of my best projects')
   const [categories, setCategories] = useState(stored?.categories || ['All', ...new Set(defaultProjects.map(p => p.category))])
+  const defaultSectionOrder = ['hero', 'works']
+  const [sectionOrder, setSectionOrder] = useState(stored?.sectionOrder || defaultSectionOrder)
   const [saveStatus, setSaveStatus] = useState('saved')
   const [pushStatus, setPushStatus] = useState('idle') // idle | pushing | pushed | error
   const [autoPush, setAutoPush] = useState(() => {
@@ -120,11 +134,11 @@ export function EditorProvider({ children }) {
     setSaveStatus('saving')
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current)
     saveTimerRef.current = setTimeout(() => {
-      const ok = saveToStorage({ projects, theme, heroText, heroSubtitle, categories })
+      const ok = saveToStorage({ projects, theme, heroText, heroSubtitle, categories, sectionOrder })
       setSaveStatus(ok ? 'saved' : 'error')
     }, 300)
     return () => { if (saveTimerRef.current) clearTimeout(saveTimerRef.current) }
-  }, [projects, theme, heroText, heroSubtitle, categories])
+  }, [projects, theme, heroText, heroSubtitle, categories, sectionOrder])
 
   // Persist autoPush toggle
   useEffect(() => {
@@ -133,7 +147,7 @@ export function EditorProvider({ children }) {
 
   // Auto GitHub push after every change (when enabled) — debounced 2s
   const pushToGitHub = useCallback(async (payload) => {
-    const data = payload || { projects, theme, heroText, heroSubtitle, categories }
+    const data = payload || { projects, theme, heroText, heroSubtitle, categories, sectionOrder }
     setPushStatus('pushing')
     try {
       const res = await fetch('/api/push', {
@@ -161,7 +175,7 @@ export function EditorProvider({ children }) {
       pushToGitHub()
     }, 2000)
     return () => { if (pushTimerRef.current) clearTimeout(pushTimerRef.current) }
-  }, [projects, theme, heroText, heroSubtitle, categories, autoPush, pushToGitHub])
+  }, [projects, theme, heroText, heroSubtitle, categories, sectionOrder, autoPush, pushToGitHub])
 
   const updateProject = useCallback((id, updates) => {
     setProjects(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p))
@@ -262,6 +276,7 @@ export function EditorProvider({ children }) {
     setHeroText('Works')
     setHeroSubtitle('A collection of my best projects')
     setCategories(['All', ...new Set(defaultProjects.map(p => p.category))])
+    setSectionOrder(defaultSectionOrder)
     setSaveStatus('saved')
   }, [])
 
@@ -270,19 +285,41 @@ export function EditorProvider({ children }) {
       clearTimeout(saveTimerRef.current)
       saveTimerRef.current = null
     }
-    const ok = saveToStorage({ projects, theme, heroText, heroSubtitle, categories })
+    const ok = saveToStorage({ projects, theme, heroText, heroSubtitle, categories, sectionOrder })
     setSaveStatus(ok ? 'saved' : 'error')
     return ok
-  }, [projects, theme, heroText, heroSubtitle, categories])
+  }, [projects, theme, heroText, heroSubtitle, categories, sectionOrder])
+
+  const reorderSections = useCallback((oldIndex, newIndex) => {
+    setSectionOrder(prev => {
+      const arr = [...prev]
+      const [moved] = arr.splice(oldIndex, 1)
+      arr.splice(newIndex, 0, moved)
+      return arr
+    })
+  }, [])
+
+  const moveSection = useCallback((id, direction) => {
+    setSectionOrder(prev => {
+      const idx = prev.findIndex(s => s === id)
+      if (idx === -1) return prev
+      const newIdx = direction === 'up' ? idx - 1 : idx + 1
+      if (newIdx < 0 || newIdx >= prev.length) return prev
+      const arr = [...prev]
+      const [moved] = arr.splice(idx, 1)
+      arr.splice(newIdx, 0, moved)
+      return arr
+    })
+  }, [])
 
   return (
     <EditorContext.Provider value={{
       projects, theme, guiMode, selectedElement,
       heroText, heroSubtitle,
-      categories, saveStatus, pushStatus, autoPush,
+      categories, sectionOrder, saveStatus, pushStatus, autoPush,
       setHeroText, setHeroSubtitle,
       updateProject, addProject, removeProject,
-      toggleProjectVisibility, reorderProjects, moveProject, reorderCategories,
+      toggleProjectVisibility, reorderProjects, moveProject, reorderCategories, reorderSections, moveSection,
       updateTheme, toggleGuiMode, setSelectedElement,
       addCategory, removeCategory, renameCategory,
       resetAll, forceSave, pushToGitHub, setAutoPush,
