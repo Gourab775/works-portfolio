@@ -33,7 +33,7 @@ export default function GUIEditor() {
     guiMode, toggleGuiMode, theme, updateTheme,
     heroText, heroSubtitle, setHeroText, setHeroSubtitle,
     projects, categories, sectionOrder, addCategory, removeCategory, renameCategory, reorderCategories, reorderSections, moveSection,
-    addProject, updateProject, removeProject, toggleProjectVisibility, reorderProjects, moveProject,
+    addProject, updateProject, removeProject, toggleProjectVisibility, reorderProjects, moveProject, reorderProjectsInCategory, moveProjectInCategory,
     saveStatus, pushStatus, autoPush, setAutoPush, forceSave, pushToGitHub, resetAll
   } = useEditor()
 
@@ -43,6 +43,10 @@ export default function GUIEditor() {
   const [expandedProject, setExpandedProject] = useState(null)
   const [showReset, setShowReset] = useState(false)
   const [projectSearch, setProjectSearch] = useState('')
+  const [posSection, setPosSection] = useState(() => {
+    const first = categories.find(c => c !== 'All')
+    return first || 'Landing Pages'
+  })
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }))
 
@@ -125,6 +129,15 @@ export default function GUIEditor() {
     const oldIndex = sectionOrder.findIndex(s => s === active.id)
     const newIndex = sectionOrder.findIndex(s => s === over.id)
     if (oldIndex !== -1 && newIndex !== -1) reorderSections(oldIndex, newIndex)
+  }
+
+  const handlePosSectionDragEnd = (event) => {
+    const { active, over } = event
+    if (!over || active.id === over.id) return
+    const list = projects.filter(p => p.category === posSection)
+    const oldIndex = list.findIndex(p => p.id === active.id)
+    const newIndex = list.findIndex(p => p.id === over.id)
+    if (oldIndex !== -1 && newIndex !== -1) reorderProjectsInCategory(posSection, oldIndex, newIndex)
   }
 
   const sectionMeta = {
@@ -473,6 +486,62 @@ export default function GUIEditor() {
               </SortableContext>
             </DndContext>
             <p className="text-[11px] font-medium text-zinc-500 mt-3 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">Drag ⋮⋮ or ▲▼ to move — har project ko move kar sakte ho. Search clear karo for drag. Website grid pe bhi drag karo.</p>
+          </section>
+
+          {/* PER-SECTION PROJECT POSITIONS */}
+          <section className="bg-white rounded-2xl border border-zinc-300 shadow-sm p-4">
+            <h3 className="text-xs font-bold text-zinc-900 uppercase tracking-widest flex items-center gap-2 mb-3">
+              <span className="w-7 h-7 rounded-lg bg-orange-600 text-white flex items-center justify-center text-xs">⇅</span>
+              Har section ke andar positions
+            </h3>
+            <p className="text-[11px] font-medium text-zinc-500 mb-3 bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">Select section (category) → uske projects ko drag ⋮⋮ / ▲▼ se order karo. Ye order sirf us section me lagega, dusre section pe asar nahi.</p>
+
+            <div className="flex gap-2 mb-3">
+              <select value={posSection} onChange={(e) => setPosSection(e.target.value)} className="flex-1 px-3.5 py-2.5 rounded-xl border border-zinc-300 text-sm font-bold bg-white outline-none focus:border-zinc-900 text-zinc-900">
+                {categories.filter(c => c !== 'All').map((c) => (
+                  <option key={c} value={c}>{c} — {projects.filter(p => p.category === c).length} projects</option>
+                ))}
+              </select>
+              <span className="px-3 py-2.5 rounded-xl bg-zinc-900 text-white text-xs font-bold whitespace-nowrap">{projects.filter(p => p.category === posSection).length} items</span>
+            </div>
+
+            <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handlePosSectionDragEnd}>
+              <SortableContext items={projects.filter(p => p.category === posSection).map(p => p.id)} strategy={verticalListSortingStrategy}>
+                <div className="space-y-2 max-h-[320px] overflow-y-auto pr-1">
+                  {projects.filter(p => p.category === posSection).map((p, idx) => {
+                    const list = projects.filter(x => x.category === posSection)
+                    const actualIdx = list.findIndex(x => x.id === p.id)
+                    return (
+                      <SortableProjectRow key={p.id} id={p.id} disabled={false}>
+                        <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white border-2 border-zinc-200 shadow-sm hover:border-zinc-900 transition">
+                          <span className="w-6 h-6 rounded-full bg-zinc-900 text-white text-xs font-bold flex items-center justify-center shrink-0">{actualIdx + 1}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-bold text-zinc-900 truncate">{p.title}</div>
+                            <div className="text-xs text-zinc-500 truncate">{p.liveUrl.replace('https://','')}</div>
+                          </div>
+                          <div className="flex flex-col gap-1 shrink-0">
+                            <button onClick={() => moveProjectInCategory(posSection, p.id, 'up')} disabled={actualIdx === 0} className="w-6 h-6 rounded bg-white border border-zinc-300 flex items-center justify-center hover:border-zinc-900 disabled:opacity-30 text-[10px]">▲</button>
+                            <button onClick={() => moveProjectInCategory(posSection, p.id, 'down')} disabled={actualIdx === list.length - 1} className="w-6 h-6 rounded bg-white border border-zinc-300 flex items-center justify-center hover:border-zinc-900 disabled:opacity-30 text-[10px]">▼</button>
+                          </div>
+                        </div>
+                      </SortableProjectRow>
+                    )
+                  })}
+                  {projects.filter(p => p.category === posSection).length === 0 && (
+                    <div className="text-center py-6 rounded-xl border-2 border-dashed border-zinc-300 bg-zinc-50">
+                      <p className="text-sm font-semibold text-zinc-700">No projects in “{posSection}”</p>
+                      <p className="text-xs text-zinc-500 mt-1">Add from Projects → + Add → choose this category</p>
+                    </div>
+                  )}
+                </div>
+              </SortableContext>
+            </DndContext>
+            <div className="mt-3 flex gap-2">
+              <button onClick={() => { const list = projects.filter(p => p.category === posSection); if (list.length > 1) { const first = list[0]; const rest = list.slice(1); const reordered = [...rest, first]; let outIdx = 0; const next = projects.map(p => p.category === posSection ? reordered[outIdx++] : p); // use reorder via multiple moves
+                // simpler: move first to last via reorder
+                reorderProjectsInCategory(posSection, 0, list.length - 1) } }} className="flex-1 py-2 rounded-xl bg-white border border-zinc-300 text-xs font-bold hover:border-zinc-900">First → Last</button>
+              <button onClick={() => { const list = projects.filter(p => p.category === posSection); if (list.length > 1) reorderProjectsInCategory(posSection, list.length - 1, 0) }} className="flex-1 py-2 rounded-xl bg-white border border-zinc-300 text-xs font-bold hover:border-zinc-900">Last → First</button>
+            </div>
           </section>
         </div>
 

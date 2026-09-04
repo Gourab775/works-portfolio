@@ -5,7 +5,7 @@ import { useEditor } from '../context/EditorContext'
 import ProjectCard from './ProjectCard'
 
 export default function WorksSection() {
-  const { projects, reorderProjects, guiMode, theme, categories } = useEditor()
+  const { projects, reorderProjects, reorderProjectsInCategory, guiMode, theme, categories } = useEditor()
   const [filter, setFilter] = useState('All')
 
   const sensors = useSensors(
@@ -21,10 +21,14 @@ export default function WorksSection() {
     const { active, over } = event
     if (!over || active.id === over.id) return
 
-    const oldIndex = projects.findIndex(p => p.id === active.id)
-    const newIndex = projects.findIndex(p => p.id === over.id)
-    if (oldIndex !== -1 && newIndex !== -1) {
-      reorderProjects(oldIndex, newIndex)
+    if (filter === 'All') {
+      const oldIndex = projects.findIndex(p => p.id === active.id)
+      const newIndex = projects.findIndex(p => p.id === over.id)
+      if (oldIndex !== -1 && newIndex !== -1) reorderProjects(oldIndex, newIndex)
+    } else {
+      const oldIndex = filteredProjects.findIndex(p => p.id === active.id)
+      const newIndex = filteredProjects.findIndex(p => p.id === over.id)
+      if (oldIndex !== -1 && newIndex !== -1) reorderProjectsInCategory(filter, oldIndex, newIndex)
     }
   }
 
@@ -65,9 +69,9 @@ export default function WorksSection() {
           )}
         </div>
 
-        {/* Project Grid - equal height cards */}
+        {/* Project Grid - equal height cards — per-section drag when filtered */}
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <SortableContext items={projects.map(p => p.id)} strategy={rectSortingStrategy}>
+          <SortableContext items={(filter === 'All' ? projects : filteredProjects).map(p => p.id)} strategy={rectSortingStrategy}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               {filteredProjects.map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
@@ -75,6 +79,9 @@ export default function WorksSection() {
             </div>
           </SortableContext>
         </DndContext>
+        {guiMode && filter !== 'All' && (
+          <p className="text-xs font-medium text-zinc-500 mt-4 text-center bg-zinc-50 border border-zinc-200 rounded-lg px-3 py-2">Per-section move — dragging reorders only within “{filter}”</p>
+        )}
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-20">

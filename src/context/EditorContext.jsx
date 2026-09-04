@@ -166,7 +166,7 @@ export function EditorProvider({ children }) {
       setTimeout(() => setPushStatus('idle'), 2500)
       return false
     }
-  }, [projects, theme, heroText, heroSubtitle, categories])
+  }, [projects, theme, heroText, heroSubtitle, categories, sectionOrder])
 
   useEffect(() => {
     if (!autoPush) return
@@ -224,6 +224,31 @@ export function EditorProvider({ children }) {
       const [moved] = arr.splice(idx, 1)
       arr.splice(newIdx, 0, moved)
       return arr
+    })
+  }, [])
+
+  const reorderProjectsInCategory = useCallback((category, oldIndex, newIndex) => {
+    setProjects(prev => {
+      const catList = prev.filter(p => p.category === category)
+      if (oldIndex < 0 || newIndex < 0 || oldIndex >= catList.length || newIndex >= catList.length) return prev
+      const [moved] = catList.splice(oldIndex, 1)
+      catList.splice(newIndex, 0, moved)
+      let outIdx = 0
+      return prev.map(p => (p.category === category ? catList[outIdx++] : p))
+    })
+  }, [])
+
+  const moveProjectInCategory = useCallback((category, id, direction) => {
+    setProjects(prev => {
+      const catList = prev.filter(p => p.category === category)
+      const idx = catList.findIndex(p => p.id === id)
+      if (idx === -1) return prev
+      const newIdx = direction === 'up' ? idx - 1 : idx + 1
+      if (newIdx < 0 || newIdx >= catList.length) return prev
+      const [moved] = catList.splice(idx, 1)
+      catList.splice(newIdx, 0, moved)
+      let outIdx = 0
+      return prev.map(p => (p.category === category ? catList[outIdx++] : p))
     })
   }, [])
 
@@ -319,7 +344,7 @@ export function EditorProvider({ children }) {
       categories, sectionOrder, saveStatus, pushStatus, autoPush,
       setHeroText, setHeroSubtitle,
       updateProject, addProject, removeProject,
-      toggleProjectVisibility, reorderProjects, moveProject, reorderCategories, reorderSections, moveSection,
+      toggleProjectVisibility, reorderProjects, moveProject, reorderProjectsInCategory, moveProjectInCategory, reorderCategories, reorderSections, moveSection,
       updateTheme, toggleGuiMode, setSelectedElement,
       addCategory, removeCategory, renameCategory,
       resetAll, forceSave, pushToGitHub, setAutoPush,
