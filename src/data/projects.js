@@ -1,5 +1,5 @@
 export const defaultProjects = [
-  // Landing Pages (7)
+  // Landing Pages (8)
   {
     id: '1',
     title: 'Turbo 930 Showcase',
