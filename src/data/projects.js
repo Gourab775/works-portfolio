@@ -376,7 +376,7 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/product-workspace',
     visible: true,
   },
-  // Hero Section (1)
+  // Hero Section (2)
   {
     id: '32',
     title: 'Diet Soda Hero',
@@ -387,6 +387,18 @@ export const defaultProjects = [
     tech: ['HTML', 'CSS', 'JavaScript', 'GSAP', 'model-viewer', 'Vite'],
     liveUrl: 'https://diet-soda-hero.vercel.app',
     githubUrl: 'https://github.com/Gourab775/diet-soda-hero',
+    visible: true,
+  },
+  {
+    id: '33',
+    title: 'Ashen Press',
+    description: 'Interactive 3D art-book shelf with tactile clothbound volumes, reflective oak furniture, and drag interactions — Three.js r181, custom GLSL shaders',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Hero Section',
+    tech: ['Three.js', 'GLSL', 'React', 'Vite'],
+    liveUrl: 'https://ashen-press.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/ashen-press',
     visible: true,
   },
 ]
