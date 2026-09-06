@@ -254,6 +254,18 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/revolvyn-platform',
     visible: true,
   },
+  {
+    id: '41',
+    title: 'Homie',
+    description: 'Modern property rental platform with animated UI — Next.js 16, Tailwind v4, Framer Motion',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Brand',
+    tech: ['Next.js', 'Tailwind', 'Framer Motion'],
+    liveUrl: 'https://homie-eight-gamma.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/Homie',
+    visible: true,
+  },
   // Web Apps (6)
   {
     id: '18',
