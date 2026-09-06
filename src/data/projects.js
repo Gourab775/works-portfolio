@@ -437,6 +437,18 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/vision-reveal',
     visible: true,
   },
+  {
+    id: '38',
+    title: 'Synth',
+    description: 'Futuristic synth hero section with React, TypeScript, Vite, and Tailwind CSS',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Hero Section',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind'],
+    liveUrl: 'https://synth-hero-section.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/synth-hero-section',
+    visible: true,
+  },
   // Games (1)
   {
     id: '34',
