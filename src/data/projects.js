@@ -425,6 +425,18 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/ashen-press',
     visible: true,
   },
+  {
+    id: '37',
+    title: 'Vision Reveal',
+    description: 'Creative studio showcase — spotlight reveal effect, dark theme, and smooth hero animations',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Hero Section',
+    tech: ['HTML', 'CSS', 'JavaScript'],
+    liveUrl: 'https://vision-reveal-rosy.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/vision-reveal',
+    visible: true,
+  },
   // Games (1)
   {
     id: '34',
