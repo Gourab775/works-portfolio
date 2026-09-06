@@ -96,7 +96,7 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/Laocoon',
     visible: true,
   },
-  // E-Commerce (5)
+  // E-Commerce (6)
   {
     id: '8',
     title: 'ToonHub Collection',
@@ -155,6 +155,18 @@ export const defaultProjects = [
     tech: ['React', 'Electron', 'Supabase', 'Recharts'],
     liveUrl: 'https://flavorbite-dashboard.vercel.app',
     githubUrl: 'https://github.com/Gourab775/flavorbite-dashboard',
+    visible: true,
+  },
+  {
+    id: '35',
+    title: 'MONO E-Commerce',
+    description: 'Sustainable design e-commerce — Next.js 16, Tailwind v4, shadcn/ui, scroll animations, contact page',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'E-Commerce',
+    tech: ['Next.js', 'Tailwind', 'shadcn'],
+    liveUrl: 'https://mono-e-commerce.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/mono-e-commerce',
     visible: true,
   },
   // Brand (5)
@@ -399,6 +411,19 @@ export const defaultProjects = [
     tech: ['Three.js', 'GLSL', 'React', 'Vite'],
     liveUrl: 'https://ashen-press.vercel.app',
     githubUrl: 'https://github.com/Gourab775/ashen-press',
+    visible: true,
+  },
+  // Games (1)
+  {
+    id: '34',
+    title: 'Wave Dash',
+    description: 'Canvas wave arcade game with icon kit, leaderboard, past scores, and autoplay bot — Next.js',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Games',
+    tech: ['Next.js', 'Canvas', 'JavaScript'],
+    liveUrl: 'https://wave-dash-omega.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/wave-dash',
     visible: true,
   },
 ]
