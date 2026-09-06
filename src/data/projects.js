@@ -108,7 +108,7 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/caldo-heated-flask',
     visible: true,
   },
-  // E-Commerce (6)
+  // E-Commerce (7)
   {
     id: '8',
     title: 'ToonHub Collection',
@@ -182,7 +182,7 @@ export const defaultProjects = [
     visible: true,
   },
   {
-    id: '36',
+    id: '39',
     title: 'EVASION E-Commerce',
     description: 'Smart bottles and outdoor accessories e-commerce — Next.js 16, Tailwind, scroll animations, cart & checkout',
     thumbnail: '',
@@ -412,7 +412,7 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/product-workspace',
     visible: true,
   },
-  // Hero Section (2)
+  // Hero Section (4)
   {
     id: '32',
     title: 'Diet Soda Hero',
