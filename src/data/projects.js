@@ -169,6 +169,18 @@ export const defaultProjects = [
     githubUrl: 'https://github.com/Gourab775/mono-e-commerce',
     visible: true,
   },
+  {
+    id: '36',
+    title: 'EVASION E-Commerce',
+    description: 'Smart bottles and outdoor accessories e-commerce — Next.js 16, Tailwind, scroll animations, cart & checkout',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'E-Commerce',
+    tech: ['Next.js', 'Tailwind', 'React'],
+    liveUrl: 'https://evasion-ecommerce.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/evasion-e-commerce',
+    visible: true,
+  },
   // Brand (5)
   {
     id: '13',
