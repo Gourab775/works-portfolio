@@ -1,5 +1,5 @@
 export const defaultProjects = [
-  // Landing Pages (8)
+  // Landing Pages (9)
   {
     id: '1',
     title: 'Turbo 930 Showcase',
@@ -94,6 +94,18 @@ export const defaultProjects = [
     tech: ['Three.js', 'GLSL', 'WebGL'],
     liveUrl: 'https://laocoon-seven.vercel.app',
     githubUrl: 'https://github.com/Gourab775/Laocoon',
+    visible: true,
+  },
+  {
+    id: '36',
+    title: 'Caldo Heated Flask',
+    description: 'Scroll-driven 3D landing page for a one-button heated flask — 57°C for 90 minutes, Three.js hero, editorial sections',
+    thumbnail: '',
+    thumbnailType: 'image',
+    category: 'Landing Pages',
+    tech: ['Next.js', 'Three.js', 'CSS'],
+    liveUrl: 'https://caldo-heated-flask.vercel.app',
+    githubUrl: 'https://github.com/Gourab775/caldo-heated-flask',
     visible: true,
   },
   // E-Commerce (6)
