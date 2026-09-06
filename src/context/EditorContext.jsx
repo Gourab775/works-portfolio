@@ -3,9 +3,9 @@ import { defaultProjects, defaultTheme } from '../data/projects'
 
 const EditorContext = createContext(null)
 
-const STORAGE_KEY = 'works-by-gourab-data-v2'
+const STORAGE_KEY = 'works-by-gourab-data-v3'
 
-const LEGACY_KEY = 'works-portfolio-data-v2'
+const LEGACY_KEY = 'works-by-gourab-data-v2'
 
 function loadFromStorage() {
   try {
