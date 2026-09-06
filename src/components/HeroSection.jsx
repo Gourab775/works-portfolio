@@ -91,6 +91,13 @@ export default function HeroSection() {
           <div className="w-2 h-2 rotate-45" style={{ backgroundColor: theme.accentColor }}></div>
           <div className="h-px w-16" style={{ backgroundColor: theme.cardBorder }}></div>
         </div>
+
+        <div className="mt-6 flex items-center justify-center">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-wide">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            Live Update: Sep 6, 2026 — Deploy OK
+          </span>
+        </div>
       </div>
     </section>
   )
