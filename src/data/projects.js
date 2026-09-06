@@ -97,7 +97,7 @@ export const defaultProjects = [
     visible: true,
   },
   {
-    id: '36',
+    id: '40',
     title: 'Caldo Heated Flask',
     description: 'Scroll-driven 3D landing page for a one-button heated flask — 57°C for 90 minutes, Three.js hero, editorial sections',
     thumbnail: '',
