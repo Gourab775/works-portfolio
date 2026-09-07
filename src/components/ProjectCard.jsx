@@ -176,8 +176,11 @@ export default function ProjectCard({ project }) {
       )}
 
       {/* Thumbnail — with auto screenshot (website first look) */}
-      <div
-        className="relative aspect-[16/10] overflow-hidden shrink-0"
+      <a
+        href={project.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative aspect-[16/10] overflow-hidden shrink-0 block"
         style={{ backgroundColor: theme.tagBg }}
       >
         {hasCustomThumb ? (
@@ -217,22 +220,16 @@ export default function ProjectCard({ project }) {
           </div>
         )}
 
-        {/* Badges */}
-        {isVideo && hasCustomThumb && (
-          <div className="absolute top-3 right-3">
-            <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm flex items-center gap-1">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              Video
-            </span>
-          </div>
-        )}
-        {!hasCustomThumb && screenshotUrl && (
-          <div className="absolute top-3 right-3">
-            <span className="text-[10px] font-medium px-2 py-1 rounded-full bg-white/90 text-zinc-700 backdrop-blur-sm border border-zinc-200">
-              Live SS
-            </span>
-          </div>
-        )}
+        {/* Redirect icon badge */}
+        <div className="absolute top-3 right-3">
+          <span className="text-xs font-medium px-2 py-1 rounded-full bg-black/60 text-white backdrop-blur-sm flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+          </span>
+        </div>
 
         {guiMode && (
           <label className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
@@ -273,7 +270,7 @@ export default function ProjectCard({ project }) {
             />
           </span>
         </div>
-      </div>
+      </a>
 
       {/* Content */}
       <div className="p-5 flex flex-col flex-1" style={{ backgroundColor: theme.cardBg, borderTop: `1px solid ${theme.cardBorder}` }}>

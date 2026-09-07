@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useEditor } from '../context/EditorContext'
 
 export default function HeroSection() {
-  const { heroText, heroSubtitle, guiMode, setHeroText, setHeroSubtitle, setSelectedElement, theme } = useEditor()
+  const { heroText, guiMode, setHeroText, setSelectedElement, theme } = useEditor()
   const [editing, setEditing] = useState(null)
   const inputRef = useRef(null)
 
@@ -60,44 +60,9 @@ export default function HeroSection() {
           </h1>
         )}
 
-        {editing === 'subtitle' ? (
-          <input
-            ref={inputRef}
-            type="text"
-            value={heroSubtitle}
-            onChange={(e) => setHeroSubtitle(e.target.value)}
-            onBlur={handleSave}
-            onKeyDown={handleKeyDown}
-            className="text-lg md:text-xl text-center w-full bg-transparent border-b-2 border-indigo-500 outline-none pb-1 mt-4"
-            style={{ color: theme.heroText }}
-          />
-        ) : (
-          <p
-            className={`text-lg md:text-xl max-w-2xl mx-auto ${guiMode ? 'cursor-pointer hover:opacity-80' : ''}`}
-            style={{ color: theme.cardDesc, opacity: 0.9 }}
-            onClick={(e) => {
-              if (guiMode) {
-                e.stopPropagation()
-                setEditing('subtitle')
-              }
-            }}
-          >
-            {heroSubtitle}
-          </p>
-        )}
 
-        <div className="mt-8 flex items-center justify-center gap-2">
-          <div className="h-px w-16" style={{ backgroundColor: theme.cardBorder }}></div>
-          <div className="w-2 h-2 rotate-45" style={{ backgroundColor: theme.accentColor }}></div>
-          <div className="h-px w-16" style={{ backgroundColor: theme.cardBorder }}></div>
-        </div>
 
-        <div className="mt-6 flex items-center justify-center">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-wide">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Live Update: Sep 6, 2026 — Deploy OK
-          </span>
-        </div>
+
       </div>
     </section>
   )
